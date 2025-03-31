@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ngobeacon/donation_needs_page.dart';
+import 'package:ngobeacon/ngowiki_page.dart';
 import 'side_menu.dart';
 import 'home_page.dart';
 import 'applications_page.dart';
@@ -79,8 +81,8 @@ class _UploadPageState extends State<UploadPage> {
             SizedBox(height: 20),
             _buildUploadButton(context, "Create New Event & Assistance/Internship Requirements", CreateEventPage()),
             _buildUploadButton(context, "Current Events", null), // Add respective pages later
-            _buildUploadButton(context, "NGOWiki Page", null),
-            _buildUploadButton(context, "Update Donation Needs", null),
+            _buildUploadButton(context, "NGOWiki Page", NGOWikiPage()),
+            _buildUploadButton(context, "Update Donation Needs", DonationNeedsPage()),
           ],
         ),
       ),
