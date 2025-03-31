@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ngobeacon/side_menu.dart';
+import 'package:ngobeacon/update_ngowiki_page.dart';
 import 'home_page.dart';
 import 'applications_page.dart';
 import 'upload_page.dart';
@@ -27,7 +29,10 @@ class NGOWikiPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.menu, color: Color(0xFF002B5B)),
             onPressed: () {
-              Scaffold.of(context).openDrawer(); // Add Drawer if needed
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> SideMenuPage())
+              );// Add Drawer if needed
             },
           )
         ],
@@ -54,6 +59,10 @@ class NGOWikiPage extends StatelessWidget {
             const SizedBox(height: 12),
             _buildButton("Update NGOWiki Page", context, onTap: () {
               // Navigate to Update/Edit Page
+              Navigator.push(
+                context,
+                  MaterialPageRoute(builder: (context)=> UpdateNGOWikiPage())
+              );
             }),
           ],
         ),

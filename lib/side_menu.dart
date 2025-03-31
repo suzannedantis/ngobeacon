@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ngobeacon/about_us.dart';
 import 'package:ngobeacon/login_page.dart';
 import 'package:ngobeacon/settings_page.dart';
 import 'ngo_profile.dart';
@@ -43,6 +44,10 @@ class SideMenuPage extends StatelessWidget {
             }),
             _buildMenuButton("About Us", () {
               // Navigate to About Us Page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsPage()), // Navigate to upload Page
+              );
             }),
             _buildMenuButton("Log Out", () {
               // Handle logout
