@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/Auth/auth_gate.dart';
-import 'package:ngobeacon/applications_page.dart';
+import 'package:ngobeacon/ngo_applications_page.dart';
 import 'package:ngobeacon/change_password.dart';
 import 'package:ngobeacon/ngo_profile.dart';
 import 'package:ngobeacon/create_event_page.dart';
 import 'login_page.dart';
 import 'create_event_page.dart';
-import 'upload_page.dart';
+import 'ngo_upload_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 

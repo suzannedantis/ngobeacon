@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'login_page.dart'; // Import the login page
+import 'login_page.dart';
 
 class SignupPage extends StatelessWidget {
   @override

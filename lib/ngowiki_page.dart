@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/side_menu.dart';
+import 'package:ngobeacon/ngo_menu.dart';
 import 'package:ngobeacon/update_ngowiki_page.dart';
-import 'home_page.dart';
-import 'applications_page.dart';
-import 'upload_page.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class NGOWikiPage extends StatelessWidget {
   const NGOWikiPage({super.key});
@@ -12,31 +11,7 @@ class NGOWikiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF002B5B),
-      appBar: AppBar(
-        title: const Text(
-          "NGOBeacon",
-          style:
-          TextStyle(color: Color(0xFF002B5B), fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child:
-          Image.asset('assets/Images/logo.png'), // replace with your logo
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu, color: Color(0xFF002B5B)),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=> SideMenuPage())
-              );// Add Drawer if needed
-            },
-          )
-        ],
-      ),
+      appBar: TopNavBar(),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView(
@@ -74,7 +49,7 @@ class NGOWikiPage extends StatelessWidget {
         },
         child: const Icon(Icons.chat_bubble_outline, color: Color(0xFF002B5B)),
       ),
-      bottomNavigationBar: _buildBottomNavBar(context),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 2),
     );
   }
 
@@ -99,47 +74,5 @@ class NGOWikiPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavBar(BuildContext context) {
-    return BottomAppBar(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Navigate to Home Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()), // Navigate to HomePage
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.article, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Navigate to Reports Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => ApplicationsPage()), // Navigate to Applications Page
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.share, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Share NGO info
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => UploadPage()), // Navigate to upload Page
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+
   }
-}

@@ -9,7 +9,7 @@ UnAuthorized --> UserSignIn
 
 import '/login_page.dart';
 import 'package:flutter/material.dart';
-import '/home_page.dart';
+import '/ngo_homescreen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthGate extends StatelessWidget {

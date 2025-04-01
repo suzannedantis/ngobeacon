@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/donation_needs_page.dart';
 import 'package:ngobeacon/ngowiki_page.dart';
-import 'side_menu.dart';
-import 'home_page.dart';
-import 'applications_page.dart';
+import 'ngo_menu.dart';
+import 'ngo_homescreen.dart';
+import 'ngo_applications_page.dart';
 import 'create_event_page.dart'; // Import the page for creating a new event
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class UploadPage extends StatefulWidget {
   @override
@@ -39,30 +41,7 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF002B5B), // Dark blue background
-      appBar: AppBar(
-        title: Text(
-          'NGOBeacon',
-          style: TextStyle(color: Color(0xFF002B5B), fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: EdgeInsets.all(10),
-          child: Image.asset('assets/Images/logo.png'), // NGO Logo
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu, color: Color(0xFF002B5B)),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SideMenuPage()),
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: TopNavBar(),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -86,7 +65,7 @@ class _UploadPageState extends State<UploadPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
+      bottomNavigationBar: BottomNavBar(selectedIndex:2),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Chat icon action
@@ -129,41 +108,4 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  Widget _buildBottomNavBar() {
-    return BottomAppBar(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(
-                Icons.home,
-                size: 30,
-                color: _selectedIndex == 0 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () => _onItemTapped(0),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.article,
-                size: 30,
-                color: _selectedIndex == 1 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () => _onItemTapped(1),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.upload_file,
-                size: 30,
-                color: _selectedIndex == 2 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () {}, // Already on UploadPage
-            ),
-          ],
-        ),
-      ),
-    );
   }
-}

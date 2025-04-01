@@ -4,25 +4,16 @@ import 'package:ngobeacon/about_us.dart';
 import 'package:ngobeacon/login_page.dart';
 import 'package:ngobeacon/settings_page.dart';
 import 'ngo_profile.dart';
-import 'applications_page.dart';
-import 'home_page.dart';
-import 'upload_page.dart';
-import 'create_event_page.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class SideMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF002B5B),
-        title: Text(
-          "NGOBeacon",
-          style: GoogleFonts.lato(color: Colors.white, fontSize: 20),
-        ),
-        centerTitle: true,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavBar(),
+      appBar: TopNavBar(),
+      backgroundColor: Color(0xFFFAFAF0),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -59,7 +50,7 @@ class SideMenuPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(context),
+
     );
   }
 
@@ -87,48 +78,4 @@ class SideMenuPage extends StatelessWidget {
     );
   }
 
-  // Bottom Navigation Bar
-  Widget _buildBottomNavBar(BuildContext context) {
-    return BottomAppBar(
-      color: Color(0xFF002B5B),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home, size: 30, color: Colors.white),
-              onPressed: () {
-                // Navigate to Home Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()), // Navigate to HomePage
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.article, size: 30, color: Colors.white),
-              onPressed: () {
-                // Navigate to Reports Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => ApplicationsPage()), // Navigate to Applications Page
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.share, size: 30, color: Colors.white),
-              onPressed: () {
-                // Share NGO info
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => UploadPage()), // Navigate to upload Page
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
   }
-}
