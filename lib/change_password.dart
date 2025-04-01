@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'upload_page.dart';
-import 'home_page.dart';
-import 'applications_page.dart';
-import '../Auth/auth_service.dart'; // Import your AuthService
+import '../Auth/auth_service.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -78,11 +77,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Change Password"),
-        backgroundColor: Colors.white,
-        foregroundColor: Color(0xFF002B5B),
-      ),
+      appBar: TopNavBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -100,6 +95,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 controller: _confirmPasswordController,
                 obscureText: true,
               ),
+
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _isLoading ? null : _changePassword,
@@ -120,7 +116,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         ),
       ),
       backgroundColor: Color(0xFF002B5B),
-      bottomNavigationBar: _buildBottomNavBar(context),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
@@ -148,44 +144,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     );
   }
 
-  Widget _buildBottomNavBar(BuildContext context) {
-    return BottomAppBar(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.article, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => ApplicationsPage()),
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.share, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => UploadPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
+
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'applications_page.dart';
-import 'upload_page.dart';
+import 'ngo_upload_page.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class DonationNeedsPage extends StatefulWidget {
   const DonationNeedsPage({Key? key}) : super(key: key);
@@ -22,30 +22,7 @@ class _DonationNeedsPageState extends State<DonationNeedsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0D3C73),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFFFFFF),
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Image.asset(
-            'assets/Images/logo.png',
-            height: 10,
-          ),
-        ),
-        title: const Text(
-          'NGOBeacon',
-          style: TextStyle(
-            color: Color(0xFF0D3C73),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Icon(Icons.menu, color: Colors.white),
-          ),
-        ],
-      ),
+      appBar: TopNavBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
@@ -139,50 +116,8 @@ class _DonationNeedsPageState extends State<DonationNeedsPage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(context),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 2),
     );
   }
-  Widget _buildBottomNavBar(BuildContext context) {
-    return BottomAppBar(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.home, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Navigate to Home Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()), // Navigate to HomePage
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.article, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Navigate to Reports Page
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => ApplicationsPage()), // Navigate to Applications Page
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.share, size: 30, color: Color(0xFF002B5B)),
-              onPressed: () {
-                // Share NGO info
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => UploadPage()), // Navigate to upload Page
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+
   }
-}

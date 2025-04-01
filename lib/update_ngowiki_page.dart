@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/ngowiki_page.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class UpdateNGOWikiPage extends StatelessWidget {
   const UpdateNGOWikiPage({Key? key}) : super(key: key);
@@ -7,19 +9,8 @@ class UpdateNGOWikiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0D3C73),
-        title: const Text(
-          'Update NGOWiki Page',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: TopNavBar(),
+      bottomNavigationBar: BottomNavBar(selectedIndex:2),
       backgroundColor: const Color(0xFF0D3C73),
       body: SingleChildScrollView(
         child: Padding(
@@ -85,27 +76,7 @@ class UpdateNGOWikiPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF0D3C73),
-        unselectedItemColor: Colors.grey,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.upload),
-            label: '',
-          ),
-        ],
-      ),
+
     );
   }
 

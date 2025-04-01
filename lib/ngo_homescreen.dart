@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'side_menu.dart';
-import 'applications_page.dart';
-import 'upload_page.dart';
+import 'ngo_menu.dart';
+import 'ngo_applications_page.dart';
+import 'ngo_upload_page.dart';
+import 'components/bottom_nav_bar.dart';
+import 'components/top_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -37,27 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF002B5B),
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text("NGOBeacon", style: TextStyle(color: Color(0xFF002B5B))),
-        centerTitle: true,
-        leading: Padding(
-          padding: EdgeInsets.all(10),
-          child: Image.asset('assets/Images/logo.png'),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.menu, color: Color(0xFF002B5B)),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SideMenuPage()),
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: TopNavBar(),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -141,45 +123,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return BottomAppBar(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(
-                Icons.home,
-                size: 30,
-                color: _selectedIndex == 0 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.article,
-                size: 30,
-                color: _selectedIndex == 1 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () => _onItemTapped(1),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.upload_file,
-                size: 30,
-                color: _selectedIndex == 2 ? Colors.blue : Color(0xFF002B5B),
-              ),
-              onPressed: () => _onItemTapped(2),
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 0),
     );
   }
 

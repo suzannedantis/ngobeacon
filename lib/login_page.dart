@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'signup_page.dart';
-import 'home_page.dart';
+import 'ngo_homescreen.dart';
 import 'forgot_password.dart';
 import '../Auth/auth_service.dart';
 
