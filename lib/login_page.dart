@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'signup_page.dart';
 import 'home_page.dart';
 import 'forgot_password.dart';
-import '../Auth/auth_service.dart';
+import 'Auth/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -79,7 +79,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.lightbulb_outline, size: 80, color: Colors.white),
+                const Icon(
+                  Icons.lightbulb_outline,
+                  size: 80,
+                  color: Colors.white,
+                ),
                 const SizedBox(height: 10),
                 Text(
                   "Welcome to",
@@ -106,17 +110,15 @@ class _LoginPageState extends State<LoginPage> {
                       backgroundColor: Colors.white24,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                   ),
                 ),
 
                 const SizedBox(height: 10),
-                Text(
-                  "or",
-                  style: GoogleFonts.lato(color: Colors.white70),
-                ),
+                Text("or", style: GoogleFonts.lato(color: Colors.white70)),
                 const SizedBox(height: 10),
 
                 // Email/Phone Number Field
@@ -185,15 +187,19 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _isLoading ? null : _signInWithEmail,
-                    child: _isLoading
-                        ? const CircularProgressIndicator(color: Color(0xFF002B5B))
-                        : const Text("Sign In"),
+                    child:
+                        _isLoading
+                            ? const CircularProgressIndicator(
+                              color: Color(0xFF002B5B),
+                            )
+                            : const Text("Sign In"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: const Color(0xFF002B5B),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
@@ -202,14 +208,17 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Forgot Password
                 TextButton(
-                  onPressed: _isLoading
-                      ? null
-                      : () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
-                    );
-                  },
+                  onPressed:
+                      _isLoading
+                          ? null
+                          : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordPage(),
+                              ),
+                            );
+                          },
                   child: Text(
                     "Forgot Password?",
                     style: GoogleFonts.lato(color: Colors.white70),
@@ -220,14 +229,17 @@ class _LoginPageState extends State<LoginPage> {
 
                 // Sign Up Navigation
                 TextButton(
-                  onPressed: _isLoading
-                      ? null
-                      : () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignupPage()),
-                    );
-                  },
+                  onPressed:
+                      _isLoading
+                          ? null
+                          : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupPage(),
+                              ),
+                            );
+                          },
                   child: Text(
                     "New NGO? Sign up for NGOBeacon",
                     style: GoogleFonts.lato(color: Colors.white),

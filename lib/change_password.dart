@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'upload_page.dart';
 import 'home_page.dart';
 import 'applications_page.dart';
-import '../Auth/auth_service.dart'; // Import your AuthService
+import 'Auth/auth_service.dart'; // Import your AuthService
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
@@ -15,9 +15,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final AuthService _authService = AuthService();
   bool _isLoading = false;
 
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   Future<void> _changePassword() async {
     final currentPassword = _currentPasswordController.text.trim();
@@ -25,7 +27,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     final confirmPassword = _confirmPasswordController.text.trim();
 
     // Validation
-    if (currentPassword.isEmpty || newPassword.isEmpty || confirmPassword.isEmpty) {
+    if (currentPassword.isEmpty ||
+        newPassword.isEmpty ||
+        confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please fill in all fields')),
       );
@@ -59,9 +63,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       // Optionally navigate back
       if (mounted) Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -88,24 +92,28 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              buildTextField("Enter Current Password",
+              buildTextField(
+                "Enter Current Password",
                 controller: _currentPasswordController,
                 obscureText: true,
               ),
-              buildTextField("Enter New Password",
+              buildTextField(
+                "Enter New Password",
                 controller: _newPasswordController,
                 obscureText: true,
               ),
-              buildTextField("Confirm New Password",
+              buildTextField(
+                "Confirm New Password",
                 controller: _confirmPasswordController,
                 obscureText: true,
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _isLoading ? null : _changePassword,
-                child: _isLoading
-                    ? CircularProgressIndicator(color: Color(0xFF002B5B))
-                    : Text("Confirm"),
+                child:
+                    _isLoading
+                        ? CircularProgressIndicator(color: Color(0xFF002B5B))
+                        : Text("Confirm"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Color(0xFF002B5B),
@@ -124,7 +132,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     );
   }
 
-  Widget buildTextField(String label, {
+  Widget buildTextField(
+    String label, {
     required TextEditingController controller,
     bool obscureText = false,
   }) {
@@ -166,7 +175,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.article, size: 30, color: Color(0xFF002B5B)),
+              icon: const Icon(
+                Icons.article,
+                size: 30,
+                color: Color(0xFF002B5B),
+              ),
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
