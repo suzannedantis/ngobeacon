@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/ngowiki_page.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
+import '../components/bottom_nav_bar.dart';
+import '../components/top_nav_bar.dart';
 
 class UpdateNGOWikiPage extends StatelessWidget {
   const UpdateNGOWikiPage({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class UpdateNGOWikiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TopNavBar(),
-      bottomNavigationBar: BottomNavBar(selectedIndex:2),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 2),
       backgroundColor: const Color(0xFF0D3C73),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,7 +42,8 @@ class UpdateNGOWikiPage extends StatelessWidget {
               buildLabel('Success Stories:'),
               buildField(),
               buildLabel(
-                  'Relevant Success Stories Images (minimum 0, maximum 7):'),
+                'Relevant Success Stories Images (minimum 0, maximum 7):',
+              ),
               buildField(),
               buildLabel('Contact Information and Address:'),
               buildField(),
@@ -53,7 +54,9 @@ class UpdateNGOWikiPage extends StatelessWidget {
                     backgroundColor: Colors.white,
                     foregroundColor: const Color(0xFF0D3C73),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 14),
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -61,8 +64,8 @@ class UpdateNGOWikiPage extends StatelessWidget {
                   onPressed: () {
                     // Save logic here
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context)=> NGOWikiPage())
+                      context,
+                      MaterialPageRoute(builder: (context) => NGOWikiPage()),
                     );
                   },
                   child: const Text(
@@ -76,7 +79,6 @@ class UpdateNGOWikiPage extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 
@@ -97,8 +99,10 @@ class UpdateNGOWikiPage extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
-        contentPadding:
-        const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 12,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,

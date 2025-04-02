@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/ngo_menu.dart';
+import 'package:ngobeacon/appbar_menu/ngo_menu.dart';
 
 class TopNavBar extends StatelessWidget implements PreferredSizeWidget {
   TopNavBar();

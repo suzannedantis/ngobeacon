@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'ngo_homescreen.dart';
 import 'ngo_upload_page.dart';
-import 'ngo_menu.dart';
 import 'components/bottom_nav_bar.dart';
 import 'components/top_nav_bar.dart';
 
@@ -47,7 +46,11 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
               Center(
                 child: Text(
                   "Applications",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               SizedBox(height: 10),
@@ -81,23 +84,41 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
         ),
       ),
       backgroundColor: Color(0xFF002B5B),
-      bottomNavigationBar: BottomNavBar(selectedIndex:1),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 1),
     );
   }
 
-  Widget _buildApplicationItem(String title, String applicants, String imagePath) {
+  Widget _buildApplicationItem(
+    String title,
+    String applicants,
+    String imagePath,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
-          Image.asset(imagePath, height: 50, width: 50), // Replace with actual image assets
+          Image.asset(
+            imagePath,
+            height: 50,
+            width: 50,
+          ), // Replace with actual image assets
           SizedBox(width: 10),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-                Text(applicants, style: TextStyle(color: Colors.white70, fontSize: 14)),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  applicants,
+                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                ),
               ],
             ),
           ),
@@ -105,6 +126,4 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
       ),
     );
   }
-
-  }
-
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/donation_needs_page.dart';
-import 'package:ngobeacon/ngowiki_page.dart';
-import 'ngo_menu.dart';
+import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
+import 'appbar_menu/ngo_menu.dart';
 import 'ngo_homescreen.dart';
 import 'ngo_applications_page.dart';
 import 'create_event_page.dart'; // Import the page for creating a new event
@@ -58,14 +58,26 @@ class _UploadPageState extends State<UploadPage> {
               ),
             ),
             SizedBox(height: 20),
-            _buildUploadButton(context, "Create New Event & Assistance/Internship Requirements", CreateEventPage()),
-            _buildUploadButton(context, "Current Events", null), // Add respective pages later
+            _buildUploadButton(
+              context,
+              "Create New Event & Assistance/Internship Requirements",
+              CreateEventPage(),
+            ),
+            _buildUploadButton(
+              context,
+              "Current Events",
+              null,
+            ), // Add respective pages later
             _buildUploadButton(context, "NGOWiki Page", NGOWikiPage()),
-            _buildUploadButton(context, "Update Donation Needs", DonationNeedsPage()),
+            _buildUploadButton(
+              context,
+              "Update Donation Needs",
+              DonationNeedsPage(),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(selectedIndex:2),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 2),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Chat icon action
@@ -107,5 +119,4 @@ class _UploadPageState extends State<UploadPage> {
       ),
     );
   }
-
-  }
+}

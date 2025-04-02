@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'change_password.dart';
+import 'appbar_menu/change_password.dart';
 import 'components/bottom_nav_bar.dart';
 import 'components/top_nav_bar.dart';
 
@@ -29,7 +29,6 @@ class NGOProfilePage extends StatelessWidget {
                 onPressed: () {
                   // Implement Save Changes Logic
                 },
-                child: Text("Save Changes"),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Color(0xFF002B5B),
@@ -38,13 +37,16 @@ class NGOProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
+                child: Text("Save Changes"),
               ),
               SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ChangePasswordPage()),
+                    MaterialPageRoute(
+                      builder: (context) => ChangePasswordPage(),
+                    ),
                   );
                 },
                 child: Text(
@@ -79,7 +81,4 @@ class NGOProfilePage extends StatelessWidget {
       ),
     );
   }
-
-
-  }
-
+}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Auth/auth_service.dart'; // Import your AuthService
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import '../Auth/auth_service.dart'; // Import your AuthService
+import '../components/bottom_nav_bar.dart';
+import '../components/top_nav_bar.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});

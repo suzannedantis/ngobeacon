@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ngobeacon/about_us.dart';
+import 'package:ngobeacon/appbar_menu/about_us.dart';
 import 'package:ngobeacon/login_page.dart';
-import 'package:ngobeacon/settings_page.dart';
-import 'ngo_profile.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import 'package:ngobeacon/appbar_menu/settings_page.dart';
+import '../ngo_profile.dart';
+import '../components/bottom_nav_bar.dart';
+import '../components/top_nav_bar.dart';
 
 class SideMenuPage extends StatelessWidget {
   @override
@@ -37,20 +37,23 @@ class SideMenuPage extends StatelessWidget {
               // Navigate to About Us Page
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => AboutUsPage()), // Navigate to upload Page
+                MaterialPageRoute(
+                  builder: (context) => AboutUsPage(),
+                ), // Navigate to upload Page
               );
             }),
             _buildMenuButton("Log Out", () {
               // Handle logout
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()), // Navigate to upload Page
+                MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ), // Navigate to upload Page
               );
             }),
           ],
         ),
       ),
-
     );
   }
 
@@ -62,10 +65,6 @@ class SideMenuPage extends StatelessWidget {
         width: double.infinity,
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(
-            text,
-            style: GoogleFonts.lato(fontSize: 18, color: Colors.white),
-          ),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF002B5B),
             padding: const EdgeInsets.symmetric(vertical: 14),
@@ -73,9 +72,12 @@ class SideMenuPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
+          child: Text(
+            text,
+            style: GoogleFonts.lato(fontSize: 18, color: Colors.white),
+          ),
         ),
       ),
     );
   }
-
-  }
+}
