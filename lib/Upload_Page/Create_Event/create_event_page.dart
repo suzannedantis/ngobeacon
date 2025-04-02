@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/ngo_menu.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import 'package:ngobeacon/components/bottom_nav_bar.dart';
+import 'package:ngobeacon/components/top_nav_bar.dart';
 
 class CreateEventPage extends StatelessWidget {
   @override
@@ -58,6 +57,4 @@ class CreateEventPage extends StatelessWidget {
       ),
     );
   }
-
-  }
-
+}

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'ngo_homescreen.dart';
-import 'ngo_upload_page.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import '../ngo_homescreen.dart';
+import '../Upload_Page/ngo_upload_page.dart';
+import '../components/bottom_nav_bar.dart';
+import '../components/top_nav_bar.dart';
 
 class ApplicationsPage extends StatefulWidget {
   @override

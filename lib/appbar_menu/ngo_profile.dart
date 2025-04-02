@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'appbar_menu/change_password.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
+import 'change_password.dart';
+import '../components/bottom_nav_bar.dart';
+import '../components/top_nav_bar.dart';
 
 class NGOProfilePage extends StatelessWidget {
   @override

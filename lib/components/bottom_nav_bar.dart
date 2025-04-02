@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/ngo_homescreen.dart';
-import 'package:ngobeacon/ngo_applications_page.dart';
-import 'package:ngobeacon/ngo_upload_page.dart';
+import 'package:ngobeacon/Applications/ngo_applications_page.dart';
+import 'package:ngobeacon/Upload_Page/ngo_upload_page.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int? selectedIndex; // Allow null for no highlight
@@ -44,15 +44,19 @@ class BottomNavBar extends StatelessWidget {
   }
 
   // 🛠 Helper Function to Build Nav Items with Reset Logic
-  Widget _buildNavItem(BuildContext context,
-      {required IconData icon,
-        required String label,
-        required int index,
-        required Widget targetScreen,
-        bool resetOnTap = false}) {
+  Widget _buildNavItem(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required int index,
+    required Widget targetScreen,
+    bool resetOnTap = false,
+  }) {
     final isSelected = selectedIndex == index;
     final selectedColor = Color(0xFF163F77);
-    final unselectedColor = Color(0xFF6A89BE); // Lighter version of Color(0xFF163F77)
+    final unselectedColor = Color(
+      0xFF6A89BE,
+    ); // Lighter version of Color(0xFF163F77)
 
     return FittedBox(
       child: Column(
@@ -60,7 +64,10 @@ class BottomNavBar extends StatelessWidget {
           IconButton(
             icon: Icon(
               icon,
-              color: isSelected ? selectedColor : unselectedColor, // Highlight selected icon
+              color:
+                  isSelected
+                      ? selectedColor
+                      : unselectedColor, // Highlight selected icon
               size: 35,
             ),
             onPressed: () {

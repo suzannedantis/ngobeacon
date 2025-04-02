@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ngobeacon/appbar_menu/about_us.dart';
 import 'package:ngobeacon/login_page.dart';
 import 'package:ngobeacon/appbar_menu/settings_page.dart';
-import '../ngo_profile.dart';
+import 'ngo_profile.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
