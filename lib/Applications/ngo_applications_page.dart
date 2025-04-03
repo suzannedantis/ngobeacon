@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../ngo_homescreen.dart';
-import '../Upload_Page/ngo_upload_page.dart';
+import 'package:ngobeacon/chat_button.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
+import 'package:ngobeacon/components/ngo_item.dart';
 
 class ApplicationsPage extends StatefulWidget {
   @override
@@ -10,29 +10,6 @@ class ApplicationsPage extends StatefulWidget {
 }
 
 class _ApplicationsPageState extends State<ApplicationsPage> {
-  int _selectedIndex = 1; // Index for Applications Page
-
-  void _onItemTapped(int index) {
-    if (index == _selectedIndex) return; // Prevent reloading the same page
-
-    switch (index) {
-      case 0:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-        break;
-      case 1:
-        break;
-      case 2:
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => UploadPage()),
-        );
-        break; // Already on UploadPage
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,37 +31,13 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
                 ),
               ),
               SizedBox(height: 10),
-              _buildApplicationItem(
-                "Tree Plantation Drive",
-                "4 applicants",
-                "assets/Icons/sowing-seeds.png",
-              ),
-              _buildApplicationItem(
-                "Blood Donation Drive",
-                "6 applicants",
-                "assets/Icons/donor.png",
-              ),
-              _buildApplicationItem(
-                "Data Entry Internship",
-                "4 applicants",
-                "assets/Icons/internship.png",
-              ),
-              _buildApplicationItem(
-                "Animal Care Internship",
-                "3 applicants",
-                "assets/Icons/animal.png",
-              ),
-              _buildApplicationItem(
-                "Clothes Donation Drive",
-                "8 applicants",
-                "assets/Icons/clothing.png",
-              ),
             ],
           ),
         ),
       ),
       backgroundColor: Color(0xFF002B5B),
       bottomNavigationBar: BottomNavBar(selectedIndex: 1),
+      floatingActionButton: ChatButton(),
     );
   }
 

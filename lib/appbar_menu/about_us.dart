@@ -40,13 +40,10 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 10),
             const Text(
               'NGOBeacon is a platform designed to streamline NGO management, '
-                  'facilitate volunteer collaboration, and promote impactful projects. '
-                  'Our mission is to empower organizations to make a difference '
-                  'through technology.',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-              ),
+              'facilitate volunteer collaboration, and promote impactful projects. '
+              'Our mission is to empower organizations to make a difference '
+              'through technology.',
+              style: TextStyle(color: Colors.white, fontSize: 14),
             ),
             const SizedBox(height: 30),
 
@@ -62,11 +59,25 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Sample Team Member Cards
-            teamMemberCard('assets/team1.png', 'John Doe', 'Lead Developer'),
+            teamMemberCard('assets/team1.png', 'Suzanne Dantis', 'Developer'),
             const SizedBox(height: 15),
-            teamMemberCard('assets/team2.png', 'Jane Smith', 'UI/UX Designer'),
+            teamMemberCard(
+              'assets/team1.png',
+              'Jiya Kathpal',
+              'Lead Developer',
+            ),
             const SizedBox(height: 15),
-            teamMemberCard('assets/team3.png', 'Mike Johnson', 'Backend Engineer'),
+            teamMemberCard(
+              'assets/team2.png',
+              'Srishti Motwani',
+              'UI/UX Designer',
+            ),
+            const SizedBox(height: 15),
+            teamMemberCard(
+              'assets/team3.png',
+              'Rohil Gujarathi',
+              'Backend Engineer',
+            ),
             const SizedBox(height: 15),
 
             // Social Media & Contact Section
@@ -107,7 +118,9 @@ class AboutUsPage extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 30,
-            backgroundImage: AssetImage(imagePath), // Replace with actual image assets
+            backgroundImage: AssetImage(
+              imagePath,
+            ), // Replace with actual image assets
           ),
           const SizedBox(width: 15),
           Column(
@@ -123,13 +136,10 @@ class AboutUsPage extends StatelessWidget {
               ),
               Text(
                 role,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
+                style: const TextStyle(fontSize: 14, color: Colors.grey),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -144,9 +154,7 @@ class AboutUsPage extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
         foregroundColor: const Color(0xFF0D3C73),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
       icon: Icon(icon),
       label: Text(label),
