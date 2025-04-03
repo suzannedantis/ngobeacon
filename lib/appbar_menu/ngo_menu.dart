@@ -6,8 +6,16 @@ import 'package:ngobeacon/appbar_menu/settings_page.dart';
 import 'ngo_profile.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '/Auth/auth_service.dart';
+
+
+final AuthService _authService = AuthService();
 
 class SideMenuPage extends StatelessWidget {
+  const SideMenuPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,14 +50,19 @@ class SideMenuPage extends StatelessWidget {
                 ), // Navigate to upload Page
               );
             }),
-            _buildMenuButton("Log Out", () {
-              // Handle logout
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => LoginPage(),
-                ), // Navigate to upload Page
-              );
+            _buildMenuButton("Log Out", () async {
+              try {
+                await _authService.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage(),),
+                      (Route<dynamic> route) => false,
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error during logout: $e')),
+                );
+              }
             }),
           ],
         ),

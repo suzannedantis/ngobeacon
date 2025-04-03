@@ -1,8 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-
-
 class AuthService{
   final SupabaseClient _supabase = Supabase.instance.client;
 
@@ -110,6 +108,8 @@ class AuthService{
     final user  = session?.user;
     return user?.email;
   }
+
+
 
 
 
