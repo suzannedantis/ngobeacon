@@ -98,13 +98,13 @@ class UpdateNGOWikiPage extends StatelessWidget {
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.grey[200],
         contentPadding: const EdgeInsets.symmetric(
           vertical: 14,
           horizontal: 12,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(08),
           borderSide: BorderSide.none,
         ),
       ),

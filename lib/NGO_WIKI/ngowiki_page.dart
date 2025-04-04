@@ -28,7 +28,7 @@ class NGOWikiPage extends StatelessWidget {
               "The NGOWiki page is a dedicated hub where NGOs can comprehensively showcase their journey—from their inception, vision, and mission to the projects they drive and the team behind them.\n\n"
               "We encourage each NGO to fill out this page, as it highlights their impact, amplifies their story, and fosters stronger connections with supporters and the broader community.\n\n"
               "For guidance, we are providing a sample NGOWiki page of an NGO to help you get started.",
-              style: TextStyle(color: Colors.white, fontSize: 14, height: 1.6),
+              style: TextStyle(color: Colors.white, fontSize: 18, height: 2.0),
             ),
             const SizedBox(height: 12),
             _buildButton(

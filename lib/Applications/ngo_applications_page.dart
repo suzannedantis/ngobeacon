@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/chat_button.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 import 'package:ngobeacon/components/ngo_item.dart';
@@ -37,7 +36,6 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
       ),
       backgroundColor: Color(0xFF002B5B),
       bottomNavigationBar: BottomNavBar(selectedIndex: 1),
-      floatingActionButton: ChatButton(),
     );
   }
 

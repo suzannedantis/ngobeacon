@@ -4,7 +4,6 @@ import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
 import 'package:ngobeacon/Upload_Page/Create_Event/create_event_page.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
-import 'package:ngobeacon/chat_button.dart';
 
 class UploadPage extends StatelessWidget {
   const UploadPage({super.key});
@@ -39,7 +38,6 @@ class UploadPage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavBar(selectedIndex: 2),
-      floatingActionButton: ChatButton(),
     );
   }
 

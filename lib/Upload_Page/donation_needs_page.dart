@@ -13,9 +13,9 @@ class DonationNeedsPage extends StatefulWidget {
 class _DonationNeedsPageState extends State<DonationNeedsPage> {
   Map<String, bool> donationNeeds = {
     'Money': false,
-    'Clothes': true,
+    'Clothes': false,
     'Articles': false,
-    'Food': true,
+    'Food': false,
   };
 
   @override
@@ -79,7 +79,7 @@ class _DonationNeedsPageState extends State<DonationNeedsPage> {
                             child: Text(
                               entry.key,
                               style: const TextStyle(
-                                color: Color(0xFF0D3C73),
+                                color: Color(0xFFFAFAF0),
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
@@ -102,7 +102,7 @@ class _DonationNeedsPageState extends State<DonationNeedsPage> {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Color(0xFFFAFAF0),
                   foregroundColor: const Color(0xFF0D3C73),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 24,

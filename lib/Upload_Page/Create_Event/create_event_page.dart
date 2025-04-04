@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ngobeacon/components/bottom_nav_bar.dart';
 import 'package:ngobeacon/components/top_nav_bar.dart';
+import 'package:ngobeacon/Upload_Page/Create_Event/create_newevent_form.dart';
+import 'package:ngobeacon/Upload_Page/Create_Event/create_assist_intern_form.dart';
 
 class CreateEventPage extends StatelessWidget {
   @override
@@ -14,32 +16,42 @@ class CreateEventPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20),
-            _buildButton(context, "Create New Event"),
-            _buildButton(context, "Create New Assistance Requirement"),
-            _buildButton(context, "Create New Internship Requirement"),
+            _buildButton(context, "Create New Event", () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CreateEventScreen()),
+              );
+            }),
+            _buildButton(
+              context,
+              "Create New Assistance/Internship Requirement",
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateAssistInterForm(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Chat icon action
-        },
-        backgroundColor: Colors.white,
-        child: Icon(Icons.chat, color: Color(0xFF002B5B)),
       ),
       bottomNavigationBar: BottomNavBar(selectedIndex: 2),
     );
   }
 
-  Widget _buildButton(BuildContext context, String title) {
+  Widget _buildButton(
+    BuildContext context,
+    String title,
+    VoidCallback onPressed,
+  ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () {
-            // Implement navigation to respective forms
-          },
+          onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.white,
             foregroundColor: Color(0xFF002B5B),
