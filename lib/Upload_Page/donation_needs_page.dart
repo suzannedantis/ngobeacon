@@ -12,16 +12,16 @@ class DonationNeedsPage extends StatefulWidget {
 
 class _DonationNeedsPageState extends State<DonationNeedsPage> {
   Map<String, bool> donationNeeds = {
-    'Money': false,
+    'Money': true,
     'Clothes': false,
-    'Articles': false,
+    'Articles': true,
     'Food': false,
   };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D3C73),
+      backgroundColor: const Color(0xFF002B5B),
       appBar: TopNavBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ngobeacon/components/bottom_nav_bar.dart';
+import 'package:ngobeacon/components/top_nav_bar.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -7,22 +9,7 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0D3C73),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0D3C73),
-        elevation: 0,
-        title: const Text(
-          'About Us',
-          style: TextStyle(
-            color: Color(0xFFBFD9FF),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: TopNavBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(
@@ -103,6 +90,7 @@ class AboutUsPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 

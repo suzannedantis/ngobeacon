@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ngobeacon/appbar_menu/about_us.dart';
+import 'package:ngobeacon/appbar_menu/change_password.dart';
 import 'package:ngobeacon/login_page.dart';
-import 'package:ngobeacon/appbar_menu/settings_page.dart';
 import 'ngo_profile.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '/Auth/auth_service.dart';
-
 
 final AuthService _authService = AuthService();
 
@@ -25,7 +24,7 @@ class SideMenuPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildMenuButton("NGO Profile", () {
               // Navigate to NGO Profile Page
@@ -34,11 +33,11 @@ class SideMenuPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => NGOProfilePage()),
               );
             }),
-            _buildMenuButton("Settings", () {
+            _buildMenuButton("Change Password", () {
               // Navigate to Settings Page
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
+                MaterialPageRoute(builder: (context) => ChangePasswordPage()),
               );
             }),
             _buildMenuButton("About Us", () {
@@ -55,8 +54,8 @@ class SideMenuPage extends StatelessWidget {
                 await _authService.signOut();
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage(),),
-                      (Route<dynamic> route) => false,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  (Route<dynamic> route) => false,
                 );
               } catch (e) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -64,6 +63,13 @@ class SideMenuPage extends StatelessWidget {
                 );
               }
             }),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "Privacy Policy",
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
+            ),
           ],
         ),
       ),

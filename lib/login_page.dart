@@ -79,11 +79,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.lightbulb_outline,
-                  size: 80,
-                  color: Colors.white,
-                ),
+                Image.asset('assets/Images/lighthouse.jpeg', height: 150),
                 const SizedBox(height: 10),
                 Text(
                   "Welcome to",
@@ -104,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     onPressed: _isLoading ? null : _signInWithGoogle,
-                    icon: const Icon(Icons.g_translate, color: Colors.white),
+                    icon: const Icon(Icons.mail, color: Colors.white),
                     label: const Text("Sign in with Google"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white24,

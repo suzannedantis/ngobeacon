@@ -86,6 +86,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               buildTextField(
                 "Enter Current Password",

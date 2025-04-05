@@ -30,6 +30,11 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
                 ),
               ),
               SizedBox(height: 10),
+              //NGOItem(
+              //name: "Tree Plantation Drive",
+              //logo: "assets/Icons/sowing-seeds.png",
+              //onPressed: () {},
+              //),
             ],
           ),
         ),

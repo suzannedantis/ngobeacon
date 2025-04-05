@@ -30,47 +30,52 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade900,
+      backgroundColor: Color(0xFF002B5B),
       appBar: TopNavBar(),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Create New Event",
-                style: TextStyle(
-                  color: Color(0xFFFAFAF0),
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              _buildTextField('Name of the Event', _nameController),
-              _buildTextField('Venue', _venueController),
-              _buildTextField('Time', _timeController),
-              _buildTextField('Estimated Duration', _durationController),
-              _buildTextField(
-                'Contact Number',
-                _contactController,
-                keyboardType: TextInputType.phone,
-              ),
-              _buildTextField('Organizer Name', _organizerController),
-              SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: _uploadEvent,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFAFAF0),
-                    foregroundColor: Colors.blue.shade900,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Create New Event",
+                  style: TextStyle(
+                    color: Color(0xFFFAFAF0),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: Text('Upload Event'),
                 ),
-              ),
-            ],
+                _buildTextField('Name of the Event', _nameController),
+                _buildTextField('Venue', _venueController),
+                _buildTextField('Time', _timeController),
+                _buildTextField('Estimated Duration', _durationController),
+                _buildTextField(
+                  'Contact Number',
+                  _contactController,
+                  keyboardType: TextInputType.phone,
+                ),
+                _buildTextField('Organizer Name', _organizerController),
+                SizedBox(height: 20),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _uploadEvent,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFAFAF0),
+                      foregroundColor: Colors.blue.shade900,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                      textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    child: Text('Upload Event'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

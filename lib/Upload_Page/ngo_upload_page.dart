@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ngobeacon/Upload_Page/Create_Event/create_assist_intern_form.dart';
 import 'package:ngobeacon/Upload_Page/donation_needs_page.dart';
+import '/Upload_Page/Create_Event/create_newevent_form.dart';
 import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
-import 'package:ngobeacon/Upload_Page/Create_Event/create_event_page.dart';
+
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
@@ -25,7 +27,7 @@ class UploadPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            _uploadButton(context, "Create New Event ", CreateEventPage()),
+            _uploadButton(context, "Create New Event ", CreateEventScreen()),
             _uploadButton(context, "Current Events", null),
             _uploadButton(context, "NGOWiki Page", NGOWikiPage()),
             _uploadButton(
@@ -33,7 +35,11 @@ class UploadPage extends StatelessWidget {
               "Update Donation Needs",
               DonationNeedsPage(),
             ),
-            _uploadButton(context, "Assistance/Internship Requirements", null),
+            _uploadButton(
+              context,
+              "Assistance/Internship Requirements",
+              CreateAssistInterForm(),
+            ),
           ],
         ),
       ),

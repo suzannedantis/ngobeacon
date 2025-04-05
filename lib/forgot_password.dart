@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'components/bottom_nav_bar.dart';
-import 'components/top_nav_bar.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF002B5B),
-      bottomNavigationBar: BottomNavBar(),
-      appBar: TopNavBar(),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(Icons.lock_reset, size: 80, color: Colors.white),
+              //const Icon(Icons.lock_reset, size: 80, color: Colors.white),
               const SizedBox(height: 10),
               Text(
                 "Forgot Password?",
@@ -63,15 +59,17 @@ class ForgotPasswordPage extends StatelessWidget {
                     // Logic for sending reset email
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text("Password reset link sent to your email."),
+                        content: Text(
+                          "Password reset link sent to your email.",
+                        ),
                         backgroundColor: Colors.green,
                       ),
                     );
                   },
                   child: const Text("Send Reset Link"),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.amber,
-                    foregroundColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    foregroundColor: Color(0xFF002B5B),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -89,7 +87,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 },
                 child: Text(
                   "Back to Login",
-                  style: GoogleFonts.lato(color: Colors.amber),
+                  style: GoogleFonts.lato(color: Colors.white),
                 ),
               ),
             ],

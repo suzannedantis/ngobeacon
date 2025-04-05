@@ -7,7 +7,7 @@ class CreateAssistInterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: Color(0xFF002B5B),
       appBar: TopNavBar(),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
