@@ -6,8 +6,6 @@ import 'package:ngobeacon/appbar_menu/settings_page.dart';
 import 'ngo_profile.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '/Auth/auth_service.dart';
 
 

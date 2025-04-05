@@ -4,6 +4,8 @@ import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
 class NGOProfilePage extends StatelessWidget {
+  const NGOProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
