@@ -1,10 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'change_password.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
-class NGOProfilePage extends StatelessWidget {
+class NGOProfilePage extends StatefulWidget {
   const NGOProfilePage({super.key});
+
+  @override
+  State<NGOProfilePage> createState() => _NGOProfilePageState();
+}
+
+class _NGOProfilePageState extends State<NGOProfilePage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _regController = TextEditingController();
+  final TextEditingController _spocController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _addressController =
+      TextEditingController(); // New
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _nameController.text = prefs.getString('ngo_name') ?? '';
+      _regController.text = prefs.getString('reg_number') ?? '';
+      _spocController.text = prefs.getString('spoc_name') ?? '';
+      _emailController.text = prefs.getString('email') ?? '';
+      _phoneController.text = prefs.getString('phone') ?? '';
+      _addressController.text = prefs.getString('address') ?? '';
+    });
+  }
+
+  Future<void> _saveProfileData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('ngo_name', _nameController.text);
+    await prefs.setString('reg_number', _regController.text);
+    await prefs.setString('spoc_name', _spocController.text);
+    await prefs.setString('email', _emailController.text);
+    await prefs.setString('phone', _phoneController.text);
+    await prefs.setString('address', _addressController.text); // Save address
+
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text("Changes Saved")));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +67,18 @@ class NGOProfilePage extends StatelessWidget {
                 child: Icon(Icons.person, size: 40, color: Colors.blue),
               ),
               SizedBox(height: 20),
-              buildTextField("NGO Name"),
-              buildTextField("Registration Number"),
-              buildTextField("Single Point of Contact (SPOC) Name"),
-              buildTextField("Email"),
-              buildTextField("Phone Number"),
+              _buildTextField("NGO Name", _nameController),
+              _buildTextField("Registration Number", _regController),
+              _buildTextField(
+                "Single Point of Contact (SPOC) Name",
+                _spocController,
+              ),
+              _buildTextField("Email", _emailController),
+              _buildTextField("Phone Number", _phoneController),
+              _buildTextField("Address", _addressController), // New
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  // Implement Save Changes Logic
-                },
+                onPressed: _saveProfileData,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.white,
                   foregroundColor: Color(0xFF002B5B),
@@ -65,10 +113,11 @@ class NGOProfilePage extends StatelessWidget {
     );
   }
 
-  Widget buildTextField(String label) {
+  Widget _buildTextField(String label, TextEditingController controller) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: TextField(
+        controller: controller,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           labelText: label,
@@ -82,5 +131,16 @@ class NGOProfilePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _regController.dispose();
+    _spocController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose(); // Dispose new controller
+    super.dispose();
   }
 }
