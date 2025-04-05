@@ -17,6 +17,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final TextEditingController _durationController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
   final TextEditingController _organizerController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   void _uploadEvent() {
     if (_formKey.currentState!.validate()) {
@@ -50,6 +51,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 ),
                 _buildTextField('Name of the Event', _nameController),
                 _buildTextField('Venue', _venueController),
+                _buildTextField('Date', _dateController),
                 _buildTextField('Time', _timeController),
                 _buildTextField('Estimated Duration', _durationController),
                 _buildTextField(
