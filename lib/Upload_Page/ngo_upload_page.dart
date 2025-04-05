@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngobeacon/Upload_Page/Create_Event/create_assist_intern_form.dart';
 import 'package:ngobeacon/Upload_Page/donation_needs_page.dart';
 import '/Upload_Page/Create_Event/create_newevent_form.dart';
-import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
+import 'package:ngobeacon/NGO_WIKI/what_ngowiki_page.dart';
 
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
