@@ -44,10 +44,6 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                '*Kindly fill out the fields in Paragraphs, and Upload Images wherever asked',
-                style: TextStyle(color: Colors.white70, fontSize: 12),
-              ),
               const SizedBox(height: 16),
               buildLabel('Established Date'),
               buildField(),
@@ -64,7 +60,7 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
                 itemCount: _nameControllers.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    color: Colors.white,
+                    color: Colors.white.withOpacity(0.1),
                     margin: EdgeInsets.symmetric(vertical: 6),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
@@ -128,8 +124,6 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
                   foregroundColor: Color(0xFF002B5B),
                 ),
               ),
-              buildLabel('Contact Information'),
-              buildField(),
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
