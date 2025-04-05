@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngobeacon/NGO_WIKI/success_stories_form.dart';
 import 'package:ngobeacon/NGO_WIKI/update_ngowiki_page.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
@@ -42,15 +43,19 @@ class NGOWikiPage extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 12),
+            _buildButton(
+              "Add a Success Story",
+              context,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SuccessStoriesForm()),
+                );
+              },
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {
-          // Navigate to chat or support
-        },
-        child: const Icon(Icons.chat_bubble_outline, color: Color(0xFF002B5B)),
       ),
       bottomNavigationBar: BottomNavBar(selectedIndex: 2),
     );

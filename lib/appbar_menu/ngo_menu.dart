@@ -61,11 +61,20 @@ class SideMenuPage extends StatelessWidget {
                 );
               }
             }),
+            _buildMenuButton("Notifications", () {
+              // Navigate to About Us Page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AboutUsPage(),
+                ), // Navigate to upload Page
+              );
+            }),
             TextButton(
               onPressed: () {},
               child: Text(
                 "Privacy Policy",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: Color(0xFF002B5B), fontSize: 12),
               ),
             ),
           ],
