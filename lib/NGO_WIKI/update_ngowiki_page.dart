@@ -4,27 +4,32 @@ import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
 class UpdateNGOWikiPage extends StatefulWidget {
-  UpdateNGOWikiPage();
+  const UpdateNGOWikiPage({super.key});
 
   @override
   State<UpdateNGOWikiPage> createState() => _UpdateNGOWikiPageState();
 }
 
 class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
-  List<TextEditingController> controllers = [TextEditingController()];
+  List<TextEditingController> _nameControllers = [TextEditingController()];
+  List<TextEditingController> _designationControllers = [
+    TextEditingController(),
+  ];
 
-  void addField() {
+  void _addMemberField() {
     setState(() {
-      controllers.add(TextEditingController());
+      _nameControllers.add(TextEditingController());
+      _designationControllers.add(TextEditingController());
     });
   }
 
-  void removeField(int index) {
-    setState(() {
-      if (controllers.length > 1) {
-        controllers.removeAt(index);
-      }
-    });
+  void _removeMemberField(int index) {
+    if (_nameControllers.length > 1) {
+      setState(() {
+        _nameControllers.removeAt(index);
+        _designationControllers.removeAt(index);
+      });
+    }
   }
 
   @override
@@ -46,63 +51,85 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
               const SizedBox(height: 16),
               buildLabel('Established Date'),
               buildField(),
-              buildLabel('Registration number'),
-              buildField(),
               buildLabel('Vision:'),
               buildField(),
               buildLabel('Mission:'),
               buildField(),
               buildLabel('Areas of Focus:'),
               buildField(),
-              buildLabel('NGO Members:'),
-              ...List.generate(controllers.length, (index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: controllers[index],
-                          style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            labelText: 'Member ${index + 1}',
-                            labelStyle: const TextStyle(color: Colors.white70),
-                            enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
-                            ),
-                            focusedBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2,
+              buildLabel('NGO Members (Name & Designation):'),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: _nameControllers.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(vertical: 6),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: _nameControllers[index],
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              labelText: 'Member Name',
+                              labelStyle: TextStyle(color: Colors.white70),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                          SizedBox(height: 10),
+                          TextField(
+                            controller: _designationControllers[index],
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              labelText: 'Designation',
+                              labelStyle: TextStyle(color: Colors.white70),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.white),
+                              onPressed: () => _removeMemberField(index),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 10),
-                      IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.white),
-                        onPressed: () => removeField(index),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: TextButton.icon(
-                  onPressed: addField,
-                  icon: const Icon(Icons.add, color: Colors.white),
-                  label: const Text(
-                    "Add Member",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 10),
+              ElevatedButton.icon(
+                onPressed: _addMemberField,
+                icon: Icon(Icons.add),
+                label: Text("Add Member"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Color(0xFF002B5B),
                 ),
               ),
-
-              buildLabel('Contact Information and Address:'),
+              buildLabel('Contact Information'),
               buildField(),
-
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
@@ -118,10 +145,9 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
                     ),
                   ),
                   onPressed: () {
-                    // Save logic
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => NGOWikiPage()),
+                      MaterialPageRoute(builder: (context) => NGOWikiPage()),
                     );
                   },
                   child: const Text(
@@ -137,32 +163,35 @@ class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
       ),
     );
   }
-}
 
-Widget buildLabel(String text) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 12, bottom: 6),
-    child: Text(
-      text,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
-    ),
-  );
-}
-
-Widget buildField() {
-  return TextFormField(
-    maxLines: null, // Unlimited lines
-    minLines: 1, // Start with 1 line
-    keyboardType: TextInputType.multiline,
-    style: const TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-      filled: true,
-      fillColor: Colors.grey[200],
-      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(08),
-        borderSide: BorderSide.none,
+  Widget buildLabel(String text) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12, bottom: 6),
+      child: Text(
+        text,
+        style: const TextStyle(color: Colors.white, fontSize: 14),
       ),
-    ),
-  );
+    );
+  }
+
+  Widget buildField() {
+    return TextFormField(
+      maxLines: null,
+      minLines: 1,
+      keyboardType: TextInputType.multiline,
+      style: const TextStyle(color: Colors.black),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey[200],
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 12,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
 }

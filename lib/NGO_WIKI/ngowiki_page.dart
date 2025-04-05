@@ -33,7 +33,7 @@ class NGOWikiPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             _buildButton(
-              "Update NGOWiki Page",
+              "Edit NGOWiki Page",
               context,
               onTap: () {
                 // Navigate to Update/Edit Page
