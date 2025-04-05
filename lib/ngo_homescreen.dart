@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'ngo_menu.dart';
-import 'ngo_applications_page.dart';
-import 'ngo_upload_page.dart';
+import 'Applications/ngo_applications_page.dart';
+import 'Upload_Page/ngo_upload_page.dart';
 import 'components/bottom_nav_bar.dart';
 import 'components/top_nav_bar.dart';
 
