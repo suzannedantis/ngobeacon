@@ -3,8 +3,29 @@ import 'package:ngobeacon/NGO_WIKI/ngowiki_page.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
 
-class UpdateNGOWikiPage extends StatelessWidget {
-  const UpdateNGOWikiPage({Key? key}) : super(key: key);
+class UpdateNGOWikiPage extends StatefulWidget {
+  UpdateNGOWikiPage();
+
+  @override
+  State<UpdateNGOWikiPage> createState() => _UpdateNGOWikiPageState();
+}
+
+class _UpdateNGOWikiPageState extends State<UpdateNGOWikiPage> {
+  List<TextEditingController> controllers = [TextEditingController()];
+
+  void addField() {
+    setState(() {
+      controllers.add(TextEditingController());
+    });
+  }
+
+  void removeField(int index) {
+    setState(() {
+      if (controllers.length > 1) {
+        controllers.removeAt(index);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +44,9 @@ class UpdateNGOWikiPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white70, fontSize: 12),
               ),
               const SizedBox(height: 16),
-              buildLabel('Established Date, Location, Registration Number. :'),
+              buildLabel('Established Date'),
+              buildField(),
+              buildLabel('Registration number'),
               buildField(),
               buildLabel('Vision:'),
               buildField(),
@@ -32,21 +55,54 @@ class UpdateNGOWikiPage extends StatelessWidget {
               buildLabel('Areas of Focus:'),
               buildField(),
               buildLabel('NGO Members:'),
-              buildField(),
-              buildLabel('Images for Members (minimum 0, maximum 3):'),
-              buildField(),
-              buildLabel('Projects/Initiatives covered, with details:'),
-              buildField(),
-              buildLabel('Relevant Project Images (minimum 0, maximum 7):'),
-              buildField(),
-              buildLabel('Success Stories:'),
-              buildField(),
-              buildLabel(
-                'Relevant Success Stories Images (minimum 0, maximum 7):',
+              ...List.generate(controllers.length, (index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: controllers[index],
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: 'Member ${index + 1}',
+                            labelStyle: const TextStyle(color: Colors.white70),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.white),
+                        onPressed: () => removeField(index),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  onPressed: addField,
+                  icon: const Icon(Icons.add, color: Colors.white),
+                  label: const Text(
+                    "Add Member",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ),
-              buildField(),
+
               buildLabel('Contact Information and Address:'),
               buildField(),
+
               const SizedBox(height: 24),
               Center(
                 child: ElevatedButton(
@@ -62,10 +118,10 @@ class UpdateNGOWikiPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Save logic here
+                    // Save logic
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => NGOWikiPage()),
+                      MaterialPageRoute(builder: (_) => NGOWikiPage()),
                     );
                   },
                   child: const Text(
@@ -81,33 +137,32 @@ class UpdateNGOWikiPage extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget buildLabel(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 12, bottom: 6),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontSize: 14),
-      ),
-    );
-  }
+Widget buildLabel(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 12, bottom: 6),
+    child: Text(
+      text,
+      style: const TextStyle(color: Colors.white, fontSize: 14),
+    ),
+  );
+}
 
-  Widget buildField() {
-    return TextFormField(
-      maxLines: null,
-      style: const TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.grey[200],
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 12,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(08),
-          borderSide: BorderSide.none,
-        ),
+Widget buildField() {
+  return TextFormField(
+    maxLines: null, // Unlimited lines
+    minLines: 1, // Start with 1 line
+    keyboardType: TextInputType.multiline,
+    style: const TextStyle(color: Colors.black),
+    decoration: InputDecoration(
+      filled: true,
+      fillColor: Colors.grey[200],
+      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(08),
+        borderSide: BorderSide.none,
       ),
-    );
-  }
+    ),
+  );
 }
