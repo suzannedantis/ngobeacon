@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/components/top_nav_bar.dart';
 import 'package:ngobeacon/components/bottom_nav_bar.dart';
+import 'package:ngobeacon/components/top_nav_bar.dart';
 
-class CreateAssistInterForm extends StatelessWidget {
-  CreateAssistInterForm();
+class CreateAssistanceForm extends StatelessWidget {
+  const CreateAssistanceForm({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +17,7 @@ class CreateAssistInterForm extends StatelessWidget {
 
           children: [
             Text(
-              "Create Assistance/Internship Requirement",
+              "Add an Assistance Requirement",
               style: TextStyle(
                 color: Color(0xFFFAFAF0),
                 fontWeight: FontWeight.bold,
@@ -26,8 +27,6 @@ class CreateAssistInterForm extends StatelessWidget {
             buildTextField("Name of the Event"),
             buildTextField("Venue"),
             buildTextField("Date"),
-            buildTextField("Duration"),
-            buildTextField("Eligibility"),
             buildTextField("Timings"),
             buildTextField("Person-In-Charge Name"),
             buildTextField("Person-In-Charge Contact Number"),
