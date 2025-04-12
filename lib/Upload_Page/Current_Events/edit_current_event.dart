@@ -1,201 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:ngobeacon/components/top_nav_bar.dart';
+import 'package:intl/intl.dart'; // For date formatting
 import 'package:ngobeacon/components/bottom_nav_bar.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:intl/intl.dart';
 
-class EditCurrentEvent extends StatefulWidget {
-  final String eventId;
+class EditEventPage extends StatefulWidget {
   final Map<String, dynamic> eventData;
-  final String ngoId;
 
-  const EditCurrentEvent({
-    super.key,
-    required this.eventId,
-    required this.eventData,
-    required this.ngoId,
-  });
+  const EditEventPage({Key? key, required this.eventData}) : super(key: key);
 
   @override
-  State<EditCurrentEvent> createState() => _EditCurrentEventState();
+  State<EditEventPage> createState() => _EditEventPageState();
 }
 
-class _EditCurrentEventState extends State<EditCurrentEvent> {
-  final _formKey = GlobalKey<FormState>();
-  final SupabaseClient _supabase = Supabase.instance.client;
-  bool _isLoading = false;
-
-  // Controllers for form fields
-  late TextEditingController _nameController;
-  late TextEditingController _venueController;
-  late TextEditingController _durationController;
-  late TextEditingController _contactController;
-  late TextEditingController _organizerController;
+class _EditEventPageState extends State<EditEventPage> {
+  late TextEditingController _titleController;
   late TextEditingController _descriptionController;
-
-  // Date and time values
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
+  late TextEditingController _locationController;
+  late TextEditingController _dateController;
 
   @override
   void initState() {
     super.initState();
-    _initializeControllers();
-  }
-
-  void _initializeControllers() {
-    // Initialize controllers with existing data
-    _nameController = TextEditingController(text: widget.eventData['event_name']);
-    _venueController = TextEditingController(text: widget.eventData['venue']);
-    _durationController = TextEditingController(text: widget.eventData['estimated_duration']);
-    _contactController = TextEditingController(text: widget.eventData['contact_no']);
-    _organizerController = TextEditingController(text: widget.eventData['organiser_name']);
-    _descriptionController = TextEditingController(text: widget.eventData['description'] ?? '');
-
-    // Set date and time if available
-    if (widget.eventData['date'] != null) {
-      _selectedDate = DateTime.parse(widget.eventData['date']);
-    }
-
-    if (widget.eventData['time'] != null) {
-      final timeString = widget.eventData['time'];
-      final parts = timeString.split(':');
-      if (parts.length >= 2) {
-        _selectedTime = TimeOfDay(
-          hour: int.parse(parts[0]),
-          minute: int.parse(parts[1]),
-        );
-      }
-    }
+    _titleController = TextEditingController(text: widget.eventData['title']);
+    _descriptionController = TextEditingController(text: widget.eventData['description']);
+    _locationController = TextEditingController(text: widget.eventData['location']);
+    _dateController = TextEditingController(text: widget.eventData['date']);
   }
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _venueController.dispose();
-    _durationController.dispose();
-    _contactController.dispose();
-    _organizerController.dispose();
+    _titleController.dispose();
     _descriptionController.dispose();
+    _locationController.dispose();
+    _dateController.dispose();
     super.dispose();
   }
 
-  // Convert TimeOfDay to String in format HH:MM:SS
-  String _timeOfDayToString(TimeOfDay timeOfDay) {
-    final hours = timeOfDay.hour.toString().padLeft(2, '0');
-    final minutes = timeOfDay.minute.toString().padLeft(2, '0');
-    return '$hours:$minutes:00';
-  }
-
-  Future<void> _updateEvent() async {
-    if (!_formKey.currentState!.validate()) {
-      return;
-    }
-
-    if (_selectedDate == null || _selectedTime == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select date and time'))
-      );
-      return;
-    }
-
-    setState(() {
-      _isLoading = true;
+  void _saveChanges() {
+    Navigator.pop(context, {
+      'title': _titleController.text,
+      'description': _descriptionController.text,
+      'location': _locationController.text,
+      'date': _dateController.text,
     });
-
-    try {
-      // Format date for PostgreSQL (YYYY-MM-DD)
-      final formattedDate = DateFormat('yyyy-MM-dd').format(_selectedDate!);
-
-      // Format time for PostgreSQL (HH:MM:SS)
-      final formattedTime = _timeOfDayToString(_selectedTime!);
-
-      // Create updated event data map
-      final eventData = {
-        'event_name': _nameController.text,
-        'venue': _venueController.text,
-        'date': formattedDate,
-        'time': formattedTime,
-        'estimated_duration': _durationController.text,
-        'contact_no': _contactController.text,
-        'organiser_name': _organizerController.text,
-        'description': _descriptionController.text,
-        // Keep the NGO ID the same
-        'ngo_id': widget.ngoId,
-      };
-
-      // Update in Supabase events table
-      await _supabase
-          .from('events')
-          .update(eventData)
-          .eq('id', widget.eventId);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Event Updated Successfully!'))
-      );
-
-      // Go back to the events list
-      Navigator.pop(context);
-
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${error.toString()}'))
-      );
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
   }
 
-  Future<void> _deleteEvent() async {
-    // Show confirmation dialog
-    final shouldDelete = await showDialog<bool>(
+  Future<void> _pickDate() async {
+    DateTime? pickedDate = await showDatePicker(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirm Deletion'),
-        content: const Text('Are you sure you want to delete this event? This action cannot be undone.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
+      initialDate: DateTime.tryParse(_dateController.text) ?? DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2100),
     );
 
-    if (shouldDelete != true) return;
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    try {
-      // Delete from Supabase events table
-      await _supabase
-          .from('events')
-          .delete()
-          .eq('id', widget.eventId);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Event Deleted Successfully!'))
-      );
-
-      // Go back to the events list
-      Navigator.pop(context);
-
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${error.toString()}'))
-      );
-    } finally {
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       setState(() {
-        _isLoading = false;
+        _dateController.text = formattedDate;
       });
     }
   }
@@ -203,221 +63,61 @@ class _EditCurrentEventState extends State<EditCurrentEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopNavBar(),
-      bottomNavigationBar: const BottomNavBar(selectedIndex: 2),
+      appBar: AppBar(
+        title: const Text('Edit Event'),
+        backgroundColor: Colors.white,
+        foregroundColor: Color(0xFF002B5B),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _buildTextField('Title', _titleController),
+            _buildTextField('Description', _descriptionController, maxLines: 3),
+            _buildTextField('Location', _locationController),
+            GestureDetector(
+              onTap: _pickDate,
+              child: AbsorbPointer(
+                child: _buildTextField('Date', _dateController),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _saveChanges,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[900],
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('Save Changes'),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: const Color(0xFF002B5B),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Edit the Event",
-                style: TextStyle(
-                  color: Color(0xFFFAFAF0),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              const SizedBox(height: 16),
-              _buildTextField("Name of the Event", _nameController),
-              _buildTextField("Venue", _venueController),
-
-              // Date picker
-              _buildDatePicker(),
-
-              // Time picker
-              _buildTimePicker(),
-
-              _buildTextField("Estimated Duration", _durationController),
-
-              // Description field with multiple lines
-              _buildTextField(
-                "Description",
-                _descriptionController,
-                maxLines: 4,
-              ),
-
-              _buildTextField("Contact Number", _contactController),
-              _buildTextField("Organizer Name", _organizerController),
-
-              const SizedBox(height: 20),
-
-              // Update and Delete buttons
-              _buildButtons(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton(
-          onPressed: _isLoading ? null : _updateEvent,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.blue[900],
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          child: _isLoading
-              ? const SizedBox(
-            width: 20,
-            height: 20,
-            child: CircularProgressIndicator(strokeWidth: 2),
-          )
-              : const Text(
-            "Update Event",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: _isLoading ? null : _deleteEvent,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          child: const Text(
-            "Delete Event",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDatePicker() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("Date", style: TextStyle(fontSize: 16, color: Colors.white)),
-          const SizedBox(height: 5),
-          InkWell(
-            onTap: () async {
-              final DateTime? picked = await showDatePicker(
-                context: context,
-                initialDate: _selectedDate ?? DateTime.now(),
-                firstDate: DateTime.now().subtract(const Duration(days: 365)),
-                lastDate: DateTime.now().add(const Duration(days: 365)),
-              );
-              if (picked != null) {
-                setState(() {
-                  _selectedDate = picked;
-                });
-              }
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _selectedDate == null
-                        ? 'Select Date'
-                        : DateFormat('yyyy-MM-dd').format(_selectedDate!),
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                  const Icon(Icons.calendar_today, color: Colors.black54),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTimePicker() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text("Time", style: TextStyle(fontSize: 16, color: Colors.white)),
-          const SizedBox(height: 5),
-          InkWell(
-            onTap: () async {
-              final TimeOfDay? picked = await showTimePicker(
-                context: context,
-                initialTime: _selectedTime ?? TimeOfDay.now(),
-              );
-              if (picked != null) {
-                setState(() {
-                  _selectedTime = picked;
-                });
-              }
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    _selectedTime == null
-                        ? 'Select Time'
-                        : _selectedTime!.format(context),
-                    style: const TextStyle(color: Colors.black),
-                  ),
-                  const Icon(Icons.access_time, color: Colors.black54),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 
   Widget _buildTextField(String label, TextEditingController controller, {int maxLines = 1}) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(label, style: const TextStyle(fontSize: 16, color: Colors.white)),
-          const SizedBox(height: 5),
-          TextFormField(
-            controller: controller,
-            maxLines: maxLines,
-            style: const TextStyle(color: Colors.black),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide.none,
-              ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter $label';
-              }
-              return null;
-            },
+      padding: const EdgeInsets.only(bottom: 16),
+      child: TextField(
+        controller: controller,
+        maxLines: maxLines,
+        style: const TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          labelText: label,
+          labelStyle: const TextStyle(color: Colors.black87),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-        ],
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: Colors.grey),
+          ),
+        ),
       ),
     );
   }
