@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/bottom_nav_bar.dart';
 import '../components/top_nav_bar.dart';
-import 'package:ngobeacon/components/ngo_item.dart';
 
 class ApplicationsPage extends StatefulWidget {
   @override
@@ -12,53 +11,81 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF002B5B), // Light background for modern feel
       appBar: TopNavBar(),
+      bottomNavigationBar: BottomNavBar(selectedIndex: 1),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  "Applications",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                "Applications",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(height: 10),
-              //NGOItem(
-              //name: "Tree Plantation Drive",
-              //logo: "assets/Icons/sowing-seeds.png",
-              //onPressed: () {},
-              //),
-            ],
-          ),
+            ),
+            SizedBox(height: 20),
+            _buildApplicationItem(
+              "Tree Plantation Drive",
+              "18 applicants",
+              "assets/Icons/sowing-seeds.png",
+              "In Progress",
+              Colors.blueAccent,
+            ),
+            _buildApplicationItem(
+              "Blood Donation Camp",
+              "27 applicants",
+              "assets/Icons/donor.png",
+              "Approved",
+              Colors.green,
+            ),
+            _buildApplicationItem(
+              "Winter Clothes Drive",
+              "10 applicants",
+              "assets/Icons/clothing.png",
+              "Pending",
+              Colors.orangeAccent,
+            ),
+          ],
         ),
       ),
-      backgroundColor: Color(0xFF002B5B),
-      bottomNavigationBar: BottomNavBar(selectedIndex: 1),
     );
   }
 
   Widget _buildApplicationItem(
-    String title,
-    String applicants,
-    String imagePath,
-  ) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      String title,
+      String applicants,
+      String imagePath,
+      String status,
+      Color statusColor,
+      ) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
       child: Row(
         children: [
-          Image.asset(
-            imagePath,
-            height: 50,
-            width: 50,
-          ), // Replace with actual image assets
-          SizedBox(width: 10),
+          CircleAvatar(
+            radius: 28,
+            backgroundColor: Colors.grey[100],
+            backgroundImage: AssetImage(imagePath),
+          ),
+          SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,16 +93,35 @@ class _ApplicationsPageState extends State<ApplicationsPage> {
                 Text(
                   title,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
                 ),
+                SizedBox(height: 6),
                 Text(
                   applicants,
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                  ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: statusColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Text(
+              status,
+              style: TextStyle(
+                color: statusColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
             ),
           ),
         ],
